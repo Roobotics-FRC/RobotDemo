@@ -44,11 +44,6 @@ remotes {
         host = 'roborio-4373-frc.local'
         user = 'lvuser'
     }
-    localhost {
-        host = 'localhost'
-        user = 'tesla'
-        identity = file('/Users/tesla/.ssh/id_rsa')
-    }
 }
 
 jar {
