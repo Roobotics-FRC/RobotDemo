@@ -56,7 +56,7 @@ jar {
     }
 }
 
-task deploy(dependsOn: ':build') {
+task deploy(dependsOn: ':build') << {
     ssh.run {
         session(remotes.roborio) {
             copy {
