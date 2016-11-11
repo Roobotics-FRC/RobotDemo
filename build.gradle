@@ -17,7 +17,6 @@ apply plugin: 'checkstyle'
 apply plugin: 'org.hidetake.ssh'
 
 
-sourceCompatibility = 1.8
 def robotClass = 'org.usfirst.frc.team4373.Robot'
 
 repositories {
@@ -34,6 +33,7 @@ dependencies {
 }
 
 checkstyle {
+    //noinspection GroovyAssignabilityCheck
     configFile = rootProject.file('config/checkstyle/checkstyle.xml')
     toolVersion = '7.1.2'
 }
@@ -56,6 +56,7 @@ jar {
     }
 }
 
+//noinspection GroovyAssignabilityCheck
 task deploy(dependsOn: ':build') << {
     ssh.run {
         session(remotes.roborio) {
@@ -63,6 +64,8 @@ task deploy(dependsOn: ':build') << {
                 from "build/libs/robot-demo-1.0.jar"
                 into "/home/lvuser"
             }
+            execute "killall -q netconsole-host || :"
+            execute "echo 'env LD_LIBRARY_PATH=/usr/local/frc/rpath-lib/ /usr/local/frc/bin/netconsole-host /usr/local/frc/JRE/bin/java -jar /home/lvuser/FRCUserProgram.jar'"
             execute ". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r"
             execute "sync"
         }
