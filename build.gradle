@@ -1,14 +1,22 @@
 group 'com.nottesla.demo'
 version '1.0'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.hidetake:gradle-ssh-plugin:2.7.0'
+    }
+}
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'checkstyle'
+apply plugin: 'org.hidetake.ssh'
 
 
-sourceCompatibility = 1.8
 def robotClass = 'org.usfirst.frc.team4373.Robot'
 
 repositories {
@@ -25,8 +33,17 @@ dependencies {
 }
 
 checkstyle {
+    //noinspection GroovyAssignabilityCheck
     configFile = rootProject.file('config/checkstyle/checkstyle.xml')
     toolVersion = '7.1.2'
+}
+
+remotes {
+    roborio {
+        role 'masterNode'
+        host = 'roborio-4373-frc.local'
+        user = 'lvuser'
+    }
 }
 
 jar {
@@ -36,5 +53,21 @@ jar {
                 'Main-Class': robotClass,
                 'Robot-Class': robotClass
         )
+    }
+}
+
+//noinspection GroovyAssignabilityCheck
+task deploy(dependsOn: ':build') << {
+    ssh.run {
+        session(remotes.roborio) {
+            copy {
+                from "build/libs/robot-demo-1.0.jar"
+                into "/home/lvuser"
+            }
+            execute "killall -q netconsole-host || :"
+            execute "echo 'env LD_LIBRARY_PATH=/usr/local/frc/rpath-lib/ /usr/local/frc/bin/netconsole-host /usr/local/frc/JRE/bin/java -jar /home/lvuser/FRCUserProgram.jar'"
+            execute ". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r"
+            execute "sync"
+        }
     }
 }
