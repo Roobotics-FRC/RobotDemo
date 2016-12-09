@@ -5,7 +5,7 @@ package org.usfirst.frc.team4373.robot.commands;
  */
 public class ExampleCommand extends CommandBase {
     /**
-     * Initializes the command
+     * Initializes the command.
      * @author (Henry)
      */
     @Override
@@ -14,7 +14,7 @@ public class ExampleCommand extends CommandBase {
     }
 
     /**
-     * Executes the command
+     * Executes the command.
      * @author (Henry)
      */
     @Override
@@ -23,7 +23,7 @@ public class ExampleCommand extends CommandBase {
     }
 
     /**
-     * Describes the finished state of the command
+     * Describes the finished state of the command.
      * @author (Henry)
      * @return A boolean that is true if the command has finished, or else is false
      */
@@ -33,7 +33,7 @@ public class ExampleCommand extends CommandBase {
     }
 
     /**
-     * Ends the command
+     * Ends the command.
      * @author (Henry)
      */
     @Override
@@ -42,7 +42,7 @@ public class ExampleCommand extends CommandBase {
     }
 
     /**
-     * Occurs when the command has been interrupted
+     * Occurs when the command has been interrupted.
      * @author (Henry)
      */
     @Override
