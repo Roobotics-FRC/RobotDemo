@@ -35,4 +35,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         super.teleopPeriodic();
     }
+    
+    public String toString() {
+    	return "Main robot class";
+    }
 }
