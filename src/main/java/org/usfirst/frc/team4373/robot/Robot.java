@@ -37,6 +37,6 @@ public class Robot extends IterativeRobot {
     }
     
     public String toString() {
-    	return "Main robot class";
+        return "Main robot class";
     }
 }
