@@ -17,7 +17,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'org.hidetake.ssh'
 
 
-def robotClass = 'org.usfirst.frc.team4373.Robot'
+def robotClass = 'org.usfirst.frc.team4373.robot.Robot'
 
 repositories {
     mavenCentral()
@@ -38,6 +38,8 @@ checkstyle {
     toolVersion = '7.1.2'
 }
 
+
+
 remotes {
     roborio {
         role 'masterNode'
@@ -50,22 +52,26 @@ jar {
     manifest {
         attributes(
                 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                'Main-Class': robotClass,
+                'Main-Class': 'edu.wpi.first.wpilibj.RobotBase',
                 'Robot-Class': robotClass
         )
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
 //noinspection GroovyAssignabilityCheck
 task deploy(dependsOn: ':build') << {
+    ssh.settings {
+        knownHosts = allowAnyHosts
+    }
     ssh.run {
         session(remotes.roborio) {
-            copy {
-                from "build/libs/robot-demo-1.0.jar"
-                into "/home/lvuser"
-            }
+            execute "touch /tmp/brosephStalin"
+            put from: files(jar.getArchivePath().absolutePath), into: '/home/lvuser/FRCUserProgram.jar'
             execute "killall -q netconsole-host || :"
-            execute "echo 'env LD_LIBRARY_PATH=/usr/local/frc/rpath-lib/ /usr/local/frc/bin/netconsole-host /usr/local/frc/JRE/bin/java -jar /home/lvuser/FRCUserProgram.jar'"
+            execute "echo 'env LD_LIBRARY_PATH=/usr/local/frc/rpath-lib/ /usr/local/frc/bin/netconsole-host /usr/local/frc/JRE/bin/java -jar /home/lvuser/FRCUserProgram.jar' > robotCommand && chmod +x robotCommand"
             execute ". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r"
             execute "sync"
         }
