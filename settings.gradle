@@ -1,3 +1,6 @@
 rootProject.name = 'robot-demo'
 include 'src'
 findProject(':src')?.name = 'demo'
+gradle.ext.home = System.getProperty("user.home")
+gradle.ext.wpilibLibDir = "${gradle.home}/wpilib/java/current/lib/native/"
+gradle.ext.wpilibAntDir = "${gradle.home}/wpilib/java/current/ant/"

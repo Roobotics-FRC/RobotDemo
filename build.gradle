@@ -67,24 +67,20 @@ jar {
 
 //noinspection GroovyAssignabilityCheck
 task deploy(dependsOn: ':build') << {
-    def home = System.getProperty("user.home")
-    def libs = "${home}/wpilib/java/current/lib/native/"
-    def ant = "${home}/wpilib/java/current/ant/"
     ssh.settings {
         knownHosts = allowAnyHosts
     }
     ssh.run{
         session(remotes.roborioAdmin) {
-            put from: fileTree(dir: libs), into: '/usr/local/frc/lib'
+            put from: fileTree(dir: gradle.wpilibLibDir), into: '/usr/local/frc/lib'
             execute "killall -q netconsole-host || :"
-            put from: "${ant}/netconsole-host", into: '/usr/local/frc/bin'
+            put from: "${gradle.wpilibAntDir}/netconsole-host", into: '/usr/local/frc/bin'
             execute "chmod a+x /usr/local/frc/bin/netconsole-host"
         }
     }
     ssh.run {
         session(remotes.roborioStandard) {
             put from: files(jar.getArchivePath().absolutePath), into: '/home/lvuser/FRCUserProgram.jar'
-//            execute "ldconfig"
             execute "echo '/usr/local/frc/bin/netconsole-host /usr/local/frc/JRE/bin/java -Djava.library.path=/usr/local/frc/lib/ -jar /home/lvuser/FRCUserProgram.jar' > robotCommand && chmod +x robotCommand"
             execute ". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r"
             execute "sync"
