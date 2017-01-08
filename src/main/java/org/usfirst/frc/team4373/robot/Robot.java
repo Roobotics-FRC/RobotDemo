@@ -2,17 +2,18 @@ package org.usfirst.frc.team4373.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4373.robot.subsystems.DriveTrain;
 
 /**
  * Created by tesla on 10/22/16.
  */
 public class Robot extends IterativeRobot {
-    private TalonSRX test;
 
     @Override
     public void robotInit() {
-        test = new TalonSRX(2);
-        super.robotInit();
+        DriveTrain.getDriveTrain();
     }
 
     @Override
@@ -27,13 +28,12 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousPeriodic() {
-        test.set(1.0);
-        super.autonomousPeriodic();
+        Scheduler.getInstance().run();
     }
 
     @Override
     public void teleopPeriodic() {
-        super.teleopPeriodic();
+        Scheduler.getInstance().run();
     }
     
     public String toString() {
