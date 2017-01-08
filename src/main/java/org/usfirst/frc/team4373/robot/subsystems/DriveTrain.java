@@ -11,6 +11,12 @@ import org.usfirst.frc.team4373.robot.commands.teleop.DriveWithJoystick;
  */
 public class DriveTrain extends Subsystem {
     private CANTalon left1, left2, right1, right2;
+    private static DriveTrain driveTrain = null;
+
+    public static DriveTrain getDriveTrain() {
+        driveTrain = driveTrain == null ? new DriveTrain() : driveTrain;
+        return driveTrain;
+    }
 
     public DriveTrain() {
         super("DriveTrain");
