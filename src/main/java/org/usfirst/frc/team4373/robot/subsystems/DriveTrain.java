@@ -15,6 +15,7 @@ public class DriveTrain extends Subsystem {
     private CANTalon right1;
     private CANTalon right2;
     private static DriveTrain driveTrain = null;
+
     public static DriveTrain getDriveTrain() {
         driveTrain = driveTrain == null ? new DriveTrain() : driveTrain;
         return driveTrain;
