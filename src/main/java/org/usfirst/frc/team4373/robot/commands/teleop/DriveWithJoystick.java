@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4373.robot.commands.teleop;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4373.robot.commands.CommandBase;
 import org.usfirst.frc.team4373.robot.input.hid.RooJoystick;
 import org.usfirst.frc.team4373.robot.subsystems.DriveTrain;
@@ -13,11 +14,17 @@ public class DriveWithJoystick extends CommandBase {
     private DriveTrain driveTrain;
     private RooJoystick joystick;
 
+    /**
+     * Constructor for DriveWithJoystick.
+     */
+    public DriveWithJoystick() {
+        requires(DriveTrain.getDriveTrain());
+        driveTrain = DriveTrain.getDriveTrain();
+        joystick = oi.getDriveJoystick();
+    }
 
     @Override
     protected void initialize() {
-        driveTrain = DriveTrain.getDriveTrain();
-        joystick = oi.getDriveJoystick();
     }
 
     @Override
@@ -26,6 +33,8 @@ public class DriveWithJoystick extends CommandBase {
         double left = this.joystick.getAxis(1) + this.joystick.getAxis(3);
         driveTrain.setLeft(left);
         driveTrain.setRight(right);
+        SmartDashboard.putNumber("Left", left);
+        SmartDashboard.putNumber("Right", right);
     }
 
     @Override
