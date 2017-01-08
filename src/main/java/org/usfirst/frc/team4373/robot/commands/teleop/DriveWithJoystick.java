@@ -5,8 +5,9 @@ import org.usfirst.frc.team4373.robot.input.hid.RooJoystick;
 import org.usfirst.frc.team4373.robot.subsystems.DriveTrain;
 
 /**
+ * This command handles operator control of the drive train subsystem.
+ * It sets outputs based on joystick axes.
  * @author (tesla)
- * Created on 1/8/17
  */
 public class DriveWithJoystick extends CommandBase {
     private DriveTrain driveTrain;
