@@ -6,11 +6,14 @@ import org.usfirst.frc.team4373.robot.RobotMap;
 import org.usfirst.frc.team4373.robot.commands.teleop.DriveWithJoystick;
 
 /**
- * @author (tesla)
- * Created on 1/8/17
+ * Programmatic representation of physical drive train components.
+ * @author (aaplmath)
  */
 public class DriveTrain extends Subsystem {
-    private CANTalon left1, left2, right1, right2;
+    private CANTalon left1;
+    private CANTalon left2;
+    private CANTalon right1;
+    private CANTalon right2;
     private static DriveTrain driveTrain = null;
 
     public static DriveTrain getDriveTrain() {
@@ -19,7 +22,7 @@ public class DriveTrain extends Subsystem {
     }
 
     /**
-     * Initializes all motors on their respective ports, sets brake mode and reverse output, and makes all "second" motors followers of the firsts
+     * Initializes motors on respective ports, sets break and reverse modes, and sets followers.
      * @author (aaplmath)
     */
     public DriveTrain() {
@@ -46,24 +49,24 @@ public class DriveTrain extends Subsystem {
     }
 
     /**
-     * Sets power to the left motors
-     * @param power The power to allocate to the left motors from -1 to 1
+     * Sets power to the left motors.
+     * @param power The power to allocate to the left motors from -1 to 1.
      */
     public void setLeft(double power) {
         this.left1.set(power);
     }
 
     /**
-     * Sets power to the right motors
-     * @param power The power to allocate to the right motors from -1 to 1
+     * Sets power to the right motors.
+     * @param power The power to allocate to the right motors from -1 to 1.
      */
     public void setRight(double power) {
         this.right1.set(power);
     }
 
     /**
-     * Sets power to both motors simultaneously
-     * @param power The power to allocate to both motors from -1 to 1
+     * Sets power to both motors simultaneously.
+     * @param power The power to allocate to both motors from -1 to 1.
      */
     public void setBoth(double power) {
         setLeft(power);
