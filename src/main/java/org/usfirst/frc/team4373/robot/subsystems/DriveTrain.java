@@ -7,7 +7,8 @@ import org.usfirst.frc.team4373.robot.commands.teleop.DriveWithJoystick;
 
 /**
  * Programmatic representation of physical drive train components.
- * @author (aaplmath)
+ * @author aaplmath
+ * @author Henry Pitcairn
  */
 public class DriveTrain extends Subsystem {
     private CANTalon left1;
@@ -23,7 +24,6 @@ public class DriveTrain extends Subsystem {
 
     /**
      * Initializes motors on respective ports, sets break and reverse modes, and sets followers.
-     * @author (aaplmath)
     */
     public DriveTrain() {
         super("DriveTrain");
@@ -37,15 +37,16 @@ public class DriveTrain extends Subsystem {
         this.right1.enableBrakeMode(true);
         this.right2.enableBrakeMode(true);
 
-        this.left1.reverseOutput(false);
-        this.left2.reverseOutput(false);
+         // FIXME: this is because of joystick
+        this.left1.reverseOutput(true);
+        this.left2.reverseOutput(true);
         this.right1.reverseOutput(false);
         this.right2.reverseOutput(false);
 
-        this.right2.changeControlMode(CANTalon.TalonControlMode.Follower);
-        this.right2.set(RobotMap.RIGHT_DRIVE_MOTOR_1);
-        this.left2.changeControlMode(CANTalon.TalonControlMode.Follower);
-        this.left2.set(RobotMap.LEFT_DRIVE_MOTOR_1);
+        // this.right2.changeControlMode(CANTalon.TalonControlMode.Follower);
+        // this.right2.set(RobotMap.RIGHT_DRIVE_MOTOR_1);
+        // this.left2.changeControlMode(CANTalon.TalonControlMode.Follower);
+        // this.left2.set(RobotMap.LEFT_DRIVE_MOTOR_1);
     }
 
     /**
@@ -54,6 +55,7 @@ public class DriveTrain extends Subsystem {
      */
     public void setLeft(double power) {
         this.left1.set(power);
+        this.left2.set(power);
     }
 
     /**
@@ -62,6 +64,7 @@ public class DriveTrain extends Subsystem {
      */
     public void setRight(double power) {
         this.right1.set(power);
+        this.right2.set(power);
     }
 
     /**
