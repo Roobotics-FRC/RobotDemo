@@ -1,7 +1,8 @@
 package org.usfirst.frc.team4373.robot;
 
 /**
- * Created by tesla on 10/22/16.
+ * RobotMap holds various constants.
+ * @author Henry Pitcairn
  */
 public class RobotMap {
     // Sensor ports

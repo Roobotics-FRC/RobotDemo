@@ -3,7 +3,9 @@ package org.usfirst.frc.team4373.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team4373.robot.OI;
 /**
- * Created by tesla on 10/22/16.
+ * CommandBase provides a parent class for many commands
+ * and holds common variables and functionality.
+ * @author Henry Pitcairn
  */
 
 public abstract class CommandBase extends Command {
