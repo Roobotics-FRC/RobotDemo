@@ -2,7 +2,8 @@
 package org.usfirst.frc.team4373.robot.input.filter;
 
 /**
- * Created by tesla on 11/1/15.
+ * CubeFilter cubes input numbers.
+ * @author Henry Pitcairn
  */
 public class CubeFilter implements IFilter {
     @Override
