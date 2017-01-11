@@ -54,7 +54,6 @@ public class DriveTrain extends Subsystem {
      */
     public void setLeft(double power) {
         this.left1.set(power);
-        this.left2.set(power);
     }
 
     /**
@@ -63,7 +62,6 @@ public class DriveTrain extends Subsystem {
      */
     public void setRight(double power) {
         this.right1.set(power);
-        this.right2.set(power);
     }
 
     /**
