@@ -1,7 +1,11 @@
 package org.usfirst.frc.team4373.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+<<<<<<< HEAD
 import org.usfirst.frc.team4373.robot.input.filter.PiecewiseFilter2;
+=======
+import org.usfirst.frc.team4373.robot.input.filter.CubeFilter;
+>>>>>>> 58128f52c637918bd396f05f35b0c7fd10033664
 import org.usfirst.frc.team4373.robot.input.hid.RooJoystick;
 
 /**
