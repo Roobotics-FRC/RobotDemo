@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4373.robot.input.filter;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * Piecewise linear function for more granular joystick control.
  * @author (tesla)
@@ -16,8 +14,6 @@ public class PiecewiseFilter2 implements IFilter {
         } else {
             y = (3 * x) - (Math.signum(x) * 2);
         }
-        SmartDashboard.putNumber("In", x);
-        SmartDashboard.putNumber("Out", y);
         return y;
     }
 }
