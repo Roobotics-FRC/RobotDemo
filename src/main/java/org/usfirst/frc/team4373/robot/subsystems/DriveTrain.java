@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem {
     /**
      * Initializes motors on respective ports, sets break and reverse modes, and sets followers.
     */
-    public DriveTrain() {
+    private DriveTrain() {
         super("DriveTrain");
         this.left1 = new CANTalon(RobotMap.LEFT_DRIVE_MOTOR_1);
         this.left2 = new CANTalon(RobotMap.LEFT_DRIVE_MOTOR_2);
