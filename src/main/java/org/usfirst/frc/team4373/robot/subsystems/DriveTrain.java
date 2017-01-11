@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
         this.right1.enableBrakeMode(true);
         this.right2.enableBrakeMode(true);
 
-         // FIXME: this is because of joystick
+        // FIXME: this is because of joystick
         this.left1.reverseOutput(true);
         this.left2.reverseOutput(true);
         this.right1.reverseOutput(false);
