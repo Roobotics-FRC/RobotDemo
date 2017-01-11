@@ -21,6 +21,7 @@ public class OI {
 
     private OI() {
         this.driveJoystick = new RooJoystick(RobotMap.JOYSTICK_PORT, new CubeFilter());
+        this.gyro = new ADXRS450_Gyro();
     }
 
     public RooJoystick getDriveJoystick() {
