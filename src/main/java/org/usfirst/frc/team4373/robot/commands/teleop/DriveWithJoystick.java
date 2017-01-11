@@ -34,8 +34,8 @@ public class DriveWithJoystick extends CommandBase {
                 + this.joystick.getAxis(1);
         double left = this.joystick.getAxis(3, new ThirdFilter())
                 - this.joystick.getAxis(1);
-        driveTrain.setLeft(left);
-        driveTrain.setRight(right);
+        driveTrain.setLeft(-left);
+        driveTrain.setRight(-right);
         SmartDashboard.putNumber("Left", left);
         SmartDashboard.putNumber("Right", right);
     }
