@@ -5,6 +5,11 @@ package org.usfirst.frc.team4373.robot;
  * @author Henry Pitcairn
  */
 public class RobotMap {
+    // Joystick axes and buttons
+    public static final int JOYSTICK_FORWARD_AXIS = 1;
+    public static final int JOYSTICK_SIDEWAYS_AXIS = 2;
+    public static final int JOYSTICK_TWIST_AXIS = 3;
+
     // Sensor ports
     public static final int JOYSTICK_PORT = 0;
 
