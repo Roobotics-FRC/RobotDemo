@@ -37,11 +37,6 @@ public class DriveTrain extends Subsystem {
         this.right1.enableBrakeMode(true);
         this.right2.enableBrakeMode(true);
 
-        this.left1.reverseOutput(false);
-        this.left2.reverseOutput(false);
-        this.right1.reverseOutput(true);
-        this.right2.reverseOutput(true);
-
         this.right2.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.right2.set(RobotMap.RIGHT_DRIVE_MOTOR_1);
         this.left2.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -58,10 +53,11 @@ public class DriveTrain extends Subsystem {
 
     /**
      * Sets power to the right motors.
+     * Note that the right motors are facing backwards, so power is negated.
      * @param power The power to allocate to the right motors from -1 to 1.
      */
     public void setRight(double power) {
-        this.right1.set(power);
+        this.right1.set(-power);
     }
 
     /**
