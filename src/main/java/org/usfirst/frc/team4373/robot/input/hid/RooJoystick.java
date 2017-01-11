@@ -5,10 +5,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc.team4373.robot.input.filter.IFilter;
 
 /**
- * Created by tesla on 11/1/15.
- */
-
-/**
  * This class extends the WPILib Joystick class
  * to add deadzone and filter functionality.
  * @author (Henry Pitcairn)
