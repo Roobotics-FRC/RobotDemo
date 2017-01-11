@@ -1,8 +1,9 @@
 package org.usfirst.frc.team4373.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team4373.robot.RobotMap;
 import org.usfirst.frc.team4373.robot.commands.CommandBase;
-import org.usfirst.frc.team4373.robot.input.filter.ThirdFilter;
+import org.usfirst.frc.team4373.robot.input.filter.HalfFilter;
 import org.usfirst.frc.team4373.robot.input.hid.RooJoystick;
 import org.usfirst.frc.team4373.robot.subsystems.DriveTrain;
 
@@ -30,14 +31,12 @@ public class DriveWithJoystick extends CommandBase {
 
     @Override
     protected void execute() {
-        double right = this.joystick.getAxis(3, new ThirdFilter())
-                + this.joystick.getAxis(1);
-        double left = this.joystick.getAxis(3, new ThirdFilter())
-                - this.joystick.getAxis(1);
+        double right = this.joystick.getAxis(RobotMap.JOYSTICK_FORWARD_AXIS)
+                + this.joystick.getAxis(RobotMap.JOYSTICK_TWIST_AXIS, new HalfFilter());
+        double left = this.joystick.getAxis(RobotMap.JOYSTICK_FORWARD_AXIS)
+                - this.joystick.getAxis(RobotMap.JOYSTICK_TWIST_AXIS, new HalfFilter());
         driveTrain.setLeft(-left);
         driveTrain.setRight(-right);
-        SmartDashboard.putNumber("Left", left);
-        SmartDashboard.putNumber("Right", right);
     }
 
     @Override
