@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4373.robot.RobotMap;
 import org.usfirst.frc.team4373.robot.commands.CommandBase;
 import org.usfirst.frc.team4373.robot.input.filter.HalfFilter;
+import org.usfirst.frc.team4373.robot.input.filter.ThirdFilter;
 import org.usfirst.frc.team4373.robot.input.hid.RooJoystick;
 import org.usfirst.frc.team4373.robot.subsystems.DriveTrain;
 
@@ -32,9 +33,9 @@ public class DriveWithJoystick extends CommandBase {
     @Override
     protected void execute() {
         double right = this.joystick.getAxis(RobotMap.JOYSTICK_FORWARD_AXIS)
-                + this.joystick.getAxis(RobotMap.JOYSTICK_TWIST_AXIS, new HalfFilter());
+                + this.joystick.getAxis(RobotMap.JOYSTICK_TWIST_AXIS, new ThirdFilter());
         double left = this.joystick.getAxis(RobotMap.JOYSTICK_FORWARD_AXIS)
-                - this.joystick.getAxis(RobotMap.JOYSTICK_TWIST_AXIS, new HalfFilter());
+                - this.joystick.getAxis(RobotMap.JOYSTICK_TWIST_AXIS, new ThirdFilter());
         driveTrain.setLeft(-left);
         driveTrain.setRight(-right);
     }

@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4373.robot;
 
-import org.usfirst.frc.team4373.robot.input.filter.CubeFilter;
-import org.usfirst.frc.team4373.robot.input.filter.PiecewiseFilter;
 import org.usfirst.frc.team4373.robot.input.filter.PiecewiseFilter2;
 import org.usfirst.frc.team4373.robot.input.hid.RooJoystick;
 
