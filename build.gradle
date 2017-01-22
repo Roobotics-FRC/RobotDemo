@@ -67,8 +67,23 @@ jar {
     }
 }
 
+/* Caveats of networksetup implementation:
+    - May not work with older MacBook Pro models with Ethernet (requires wireless on en0)
+    - Requires admin password on first run
+*/
+// FIXME: The use of "<<" will be deprecated in Groovy 5.0—'doLast' is now preferred
 //noinspection GroovyAssignabilityCheck
 task deploy(dependsOn: ':build') << {
+    def isMacOS = OperatingSystem.current().isMacOsX()
+    if (isMacOS) {
+        Process curNetProc = Runtime.getRuntime().exec('networksetup -getairportnetwork en0')
+        BufferedReader stdInput = new BufferedReader(new InputStreamReader(curNetProc.getInputStream()))
+        String res = stdInput.readLine()
+        String network = res.substring(23)
+        curNetProc.waitFor()
+        Process setProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 dlink')
+        setProc.waitFor()
+    }
     ssh.settings {
         knownHosts = allowAnyHosts
     }
@@ -87,5 +102,9 @@ task deploy(dependsOn: ':build') << {
             execute ". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r"
             execute "sync"
         }
+    }
+    if (isMacOS) {
+        Process resetProc = Runtime.getRuntime().exec('networksetup -setairportnetwork en0 ' + network)
+        resetProc.waitFor()
     }
 }
