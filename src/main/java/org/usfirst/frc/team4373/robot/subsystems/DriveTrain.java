@@ -15,6 +15,8 @@ public class DriveTrain extends Subsystem {
     private CANTalon left2;
     private CANTalon right1;
     private CANTalon right2;
+    private CANTalon middle;
+
     private static DriveTrain driveTrain = null;
 
     public static DriveTrain getDriveTrain() {
@@ -31,16 +33,28 @@ public class DriveTrain extends Subsystem {
         this.left2 = new CANTalon(RobotMap.LEFT_DRIVE_MOTOR_2);
         this.right1 = new CANTalon(RobotMap.RIGHT_DRIVE_MOTOR_1);
         this.right2 = new CANTalon(RobotMap.RIGHT_DRIVE_MOTOR_2);
+        this.middle = new CANTalon(RobotMap.MIDDLE_DRIVE_MOTOR);
 
         this.left1.enableBrakeMode(true);
         this.left2.enableBrakeMode(true);
         this.right1.enableBrakeMode(true);
         this.right2.enableBrakeMode(true);
+        this.middle.enableBrakeMode(true);
 
         this.right2.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.right2.set(RobotMap.RIGHT_DRIVE_MOTOR_1);
         this.left2.changeControlMode(CANTalon.TalonControlMode.Follower);
         this.left2.set(RobotMap.LEFT_DRIVE_MOTOR_1);
+    }
+
+    /**
+     * Sets power to the motors.
+     * @param forward The forward power (-1=backward to 1=forward).
+     * @param right The left/right power (-1=left to 1=right).
+     */
+    public void move(double forward, double right) {
+        // TODO: Determine appropriate amount of power to deliver to right/left motors
+        this.middle.set(right);
     }
 
     /**
@@ -58,6 +72,14 @@ public class DriveTrain extends Subsystem {
      */
     public void setRight(double power) {
         this.right1.set(-power);
+    }
+
+    /**
+     * Sets power to the middle motors.
+     * @param power The power to allocate to the middle motor from -1 (left) to 1 (right).
+     */
+    public void setMiddle(double power) {
+        this.middle.set(power);
     }
 
     /**
